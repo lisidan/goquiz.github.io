@@ -19,7 +19,7 @@ $(function () {
                 "x-requested-with": location.host
             },
             dataType: "json",
-            data: { body: $('<textarea />').html($code.html()).text() },
+            data: { body: $('<textarea />').html($code.text()).text() },
             url: "https://cors-anywhere.herokuapp.com/https://play.golang.org/compile",
             success: function (data) {// bs-callout-warning bs-callout-danger bs-callout-info
                 var output, cls
