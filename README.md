@@ -16,8 +16,10 @@
 - [短声明](https://goquiz.github.io/#short-declairation)
 - [全局变量](https://goquiz.github.io/#global-varible)
 - [字符串](https://goquiz.github.io/#string-bytes)
+
 [标准库和包](https://goquiz.github.io/#lib-pack)
 - [init函数](https://goquiz.github.io/#init-import)
+
 [内部原理](https://goquiz.github.io/#internals)
 
 # 如何在本地Build

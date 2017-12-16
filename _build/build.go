@@ -77,6 +77,7 @@ func buildREADME(directory string) {
 		for _, quiz := range section.Quizzes {
 			fmt.Fprintf(os.Stdout, "- [%s](https://goquiz.github.io/#%s)\n", quiz.Name, quiz.Key)
 		}
+		fmt.Fprintln(os.Stdout)
 	}
 }
 
