@@ -152,6 +152,67 @@ func main() {
                     
 
                     
+                    <h2 id=defer-closefile>defer</h2>
+
+                    <div class=bs-example>
+                        纠正下面代码的一个错误
+                    </div>
+
+                    
+                    <figure class=highlight>
+                        <pre><code contenteditable="true" class=language-html data-lang=go>
+package main
+
+import (
+	&#34;io/ioutil&#34;
+	&#34;os&#34;
+)
+
+func main() {
+	f, err := os.Open(&#34;file&#34;)
+	defer f.Close()
+	if err != nil {
+		return
+	}
+
+	b, err := ioutil.ReadAll(f)
+	println(string(b))
+}
+
+                        </code></pre>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;io/ioutil&#34;
+	&#34;os&#34;
+)
+
+func main() {
+	f, err := os.Open(&#34;file&#34;)
+	if err != nil {
+		return
+	}
+	defer f.Close()
+
+	b, err := ioutil.ReadAll(f)
+	println(string(b))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                     <h2 id=short-declairation>短声明</h2>
 
                     <div class=bs-example>
@@ -326,8 +387,167 @@ b2
                     
 
                     
+                    <h2 id=json-unmarshal>json反序列化</h2>
+
+                    <div class=bs-example>
+                        纠正下面代码的一个错误
+                    </div>
+
+                    
+                    <figure class=highlight>
+                        <pre><code contenteditable="true" class=language-html data-lang=go>
+package main
+
+import (
+	&#34;encoding/json&#34;
+	&#34;fmt&#34;
+)
+
+type Result struct {
+	status int
+}
+
+func main() {
+	var data = []byte(`{&#34;status&#34;: 200}`)
+	result := &amp;Result{}
+
+	if err := json.Unmarshal(data, result); err != nil {
+		fmt.Println(&#34;error:&#34;, err)
+		return
+	}
+
+	fmt.Printf(&#34;result=%&#43;v&#34;, result)
+}
+
+                        </code></pre>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;encoding/json&#34;
+	&#34;fmt&#34;
+)
+
+type Result struct {
+	Status int `json:&#34;status&#34;`
+}
+
+func main() {
+	var data = []byte(`{&#34;status&#34;: 200}`)
+	result := &amp;Result{}
+
+	if err := json.Unmarshal(data, result); err != nil {
+		fmt.Println(&#34;error:&#34;, err)
+		return
+	}
+
+	fmt.Printf(&#34;result=%&#43;v&#34;, result)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                </div><div class=bs-docs-section>
+                    <h1 class=page-header id=toolchain>工具链</h1>
+                    
+                    <h2 id=gcflags>gcflags参数</h2>
+
+                    <div class=bs-example>
+                        解释以下几个gcflags参数的意义
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+-l:
+-m:
+-N:
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+-l:禁止函数inline
+-m:显示对象内存从栈向堆的escape分析，以及是否inline的选择
+-N:禁止优化
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=internals>内部原理</h1>
+                    
+                    <h2 id=unsafe-bytes-string>unsafe转换</h2>
+
+                    <div class=bs-example>
+                        在以下A行补全代码,将变量b从[]byte类型转化成string类型并且不产生内存拷贝，并使运行结果打印&#34;143&#34;
+                    </div>
+
+                    
+                    <figure class=highlight>
+                        <pre><code contenteditable="true" class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unsafe&#34;
+)
+
+func main() {
+	var b = []byte(&#34;123&#34;)
+	s := __ //A
+
+	b[1] = &#39;4&#39;
+	fmt.Printf(&#34;%&#43;v\n&#34;, s) //print 143
+}
+
+                        </code></pre>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unsafe&#34;
+)
+
+func main() {
+	var b = []byte(&#34;123&#34;)
+	s := *(*string)(unsafe.Pointer(&amp;b))
+
+	b[1] = &#39;4&#39;
+	fmt.Printf(&#34;%&#43;v\n&#34;, s) //print 143
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
                     
                 </div>
             </div>
@@ -343,6 +563,8 @@ b2
                                 </li><li>
                                     <a href=#empty-interface>interface{}万能指针</a>
                                 </li><li>
+                                    <a href=#defer-closefile>defer</a>
+                                </li><li>
                                     <a href=#short-declairation>短声明</a>
                                 </li><li>
                                     <a href=#global-varible>全局变量</a>
@@ -355,12 +577,23 @@ b2
                             <ul class=nav>
                                 <li>
                                     <a href=#init-import>init函数</a>
+                                </li><li>
+                                    <a href=#json-unmarshal>json反序列化</a>
+                                </li>
+                            </ul>
+                        </li><li>
+                            <a href=#toolchain>工具链</a>
+                            <ul class=nav>
+                                <li>
+                                    <a href=#gcflags>gcflags参数</a>
                                 </li>
                             </ul>
                         </li><li>
                             <a href=#internals>内部原理</a>
                             <ul class=nav>
-                                
+                                <li>
+                                    <a href=#unsafe-bytes-string>unsafe转换</a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

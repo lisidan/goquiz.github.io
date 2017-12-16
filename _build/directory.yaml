@@ -7,6 +7,8 @@ sections:
         name: 指针
       - key: empty-interface
         name: interface{}万能指针
+      - key: defer-closefile
+        name: defer
       - key: short-declairation
         name: 短声明
       - key: global-varible
@@ -18,6 +20,15 @@ sections:
     quizzes:
       - key: init-import
         name: init函数
+      - key: json-unmarshal
+        name: json反序列化
+  - key: toolchain
+    name: 工具链
+    quizzes:
+      - key: gcflags
+        name: gcflags参数
   - key: internals
     name: 内部原理
     quizzes:
+      - key: unsafe-bytes-string
+        name: unsafe转换
