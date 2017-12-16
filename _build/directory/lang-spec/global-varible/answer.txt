@@ -1,0 +1,4 @@
+var g //incorrect
+var g G //correct
+var g = G{} //correct
+g := G{} //incorrect

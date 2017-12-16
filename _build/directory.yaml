@@ -1,0 +1,23 @@
+---
+sections:
+  - key: lang-spec
+    name: 语言规范
+    quizzes:
+      - key: pointer
+        name: 指针
+      - key: empty-interface
+        name: interface{}万能指针
+      - key: short-declairation
+        name: 短声明
+      - key: global-varible
+        name: 全局变量
+      - key: string-bytes
+        name: 字符串
+  - key: lib-pack
+    name: 标准库和包
+    quizzes:
+      - key: init-import
+        name: init函数
+  - key: internals
+    name: 内部原理
+    quizzes:

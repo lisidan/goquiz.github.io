@@ -1,0 +1,4 @@
+var g
+var g G
+var g = G{}
+g := G{}
