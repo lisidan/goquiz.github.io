@@ -31,3 +31,9 @@ figure.editable textarea {
     border: none;
     outline: none;
 }
+.gq-report-error {
+    margin-top:40px;
+}
+.page-header {
+    margin-bottom: 0;
+}

@@ -35,6 +35,7 @@
                 {{range $section := .Sections}}<div class=bs-docs-section>
                     <h1 class=page-header id={{$section.Key}}>{{$section.Name}}</h1>
                     {{range $quiz := $section.Quizzes}}
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/{{$section.Key}}/{{$quiz.Key}}" target="_blank">报错</a>
                     <h2 id={{$quiz.Key}}>{{$quiz.Name}}</h2>
 
                     <div class=bs-example>
