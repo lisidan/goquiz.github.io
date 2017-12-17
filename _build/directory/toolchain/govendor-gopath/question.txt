@@ -1,0 +1,1 @@
+govendor是如何实现对GOPATH的覆盖的

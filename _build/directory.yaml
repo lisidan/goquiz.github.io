@@ -27,8 +27,14 @@ sections:
     quizzes:
       - key: gcflags
         name: gcflags参数
+      - key: benchmark-N
+        name: benchmark次数变量
+      - key: govendor-gopath
+        name: govendor路径覆盖
   - key: internals
     name: 内部原理
     quizzes:
       - key: unsafe-bytes-string
-        name: unsafe转换
+        name: string内部结构
+      - key: unsafe-slice-array
+        name: slice内部结构

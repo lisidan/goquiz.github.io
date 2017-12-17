@@ -492,10 +492,60 @@ func main() {
                     
 
                     
+                    <h2 id=benchmark-N>benchmark次数变量</h2>
+
+                    <div class=bs-example>
+                        以下代码中b.N是如何调整的
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+func BenchmarkFib10(b *testing.B) {
+	for n := 0; n &lt; b.N; n&#43;&#43; {
+		Fib(10)
+	}
+}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+系统以一定倍数的算法自动增大b.N直到benchmark函数运行时间稳定
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <h2 id=govendor-gopath>govendor路径覆盖</h2>
+
+                    <div class=bs-example>
+                        govendor是如何实现对GOPATH的覆盖的
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+govendor使用了vendor目录对GOPATH覆盖，vendor目录是Go 1.6开始引入的一个特性，用来引入独立的包路径以不污染GOPATH和GOROOT
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=internals>内部原理</h1>
                     
-                    <h2 id=unsafe-bytes-string>unsafe转换</h2>
+                    <h2 id=unsafe-bytes-string>string内部结构</h2>
 
                     <div class=bs-example>
                         在以下A行补全代码,将变量b从[]byte类型转化成string类型并且不产生内存拷贝，并使运行结果打印&#34;143&#34;
@@ -550,6 +600,89 @@ func main() {
                     
 
                     
+                    <h2 id=unsafe-slice-array>slice内部结构</h2>
+
+                    <div class=bs-example>
+                        在以下A行补全代码，使printOriginalSlice打印参数subslice的原始slice的值(提示:长度为M = 10)
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;reflect&#34;
+	&#34;unsafe&#34;
+)
+
+const M = 10
+const N = 5
+
+func printOriginalSlice(subslice *[]int) {
+	data := __ //A
+
+	fmt.Printf(&#34;original\t%p:%&#43;v\n&#34;, data, *data)
+}
+
+func main() {
+	slice := make([]int, M)
+	for i, _ := range slice {
+		slice[i] = i
+	}
+	subslice := slice[0:N]
+
+	fmt.Printf(&#34;slice\t%p:%&#43;v\n&#34;, &amp;slice, slice)
+	fmt.Printf(&#34;subslice\t%p:%&#43;v\n&#34;, &amp;subslice, subslice)
+	printOriginalSlice(&amp;subslice)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;reflect&#34;
+	&#34;unsafe&#34;
+)
+
+const M = 10
+const N = 5
+
+func printOriginalSlice(subslice *[]int) {
+	data := (*[M]int)(unsafe.Pointer(((*reflect.SliceHeader)(unsafe.Pointer(subslice))).Data))
+
+	fmt.Printf(&#34;original\t%p:%&#43;v\n&#34;, data, *data)
+}
+
+func main() {
+	slice := make([]int, M)
+	for i, _ := range slice {
+		slice[i] = i
+	}
+	subslice := slice[0:N]
+
+	fmt.Printf(&#34;slice\t%p:%&#43;v\n&#34;, &amp;slice, slice)
+	fmt.Printf(&#34;subslice\t%p:%&#43;v\n&#34;, &amp;subslice, subslice)
+	printOriginalSlice(&amp;subslice)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div>
             </div>
 
@@ -587,13 +720,19 @@ func main() {
                             <ul class=nav>
                                 <li>
                                     <a href=#gcflags>gcflags参数</a>
+                                </li><li>
+                                    <a href=#benchmark-N>benchmark次数变量</a>
+                                </li><li>
+                                    <a href=#govendor-gopath>govendor路径覆盖</a>
                                 </li>
                             </ul>
                         </li><li>
                             <a href=#internals>内部原理</a>
                             <ul class=nav>
                                 <li>
-                                    <a href=#unsafe-bytes-string>unsafe转换</a>
+                                    <a href=#unsafe-bytes-string>string内部结构</a>
+                                </li><li>
+                                    <a href=#unsafe-slice-array>slice内部结构</a>
                                 </li>
                             </ul>
                         </li>

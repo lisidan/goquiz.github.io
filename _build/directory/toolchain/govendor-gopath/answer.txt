@@ -1,0 +1,1 @@
+govendor使用了vendor目录对GOPATH覆盖，vendor目录是Go 1.6开始引入的一个特性，用来引入独立的包路径以不污染GOPATH和GOROOT
