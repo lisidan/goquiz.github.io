@@ -40,3 +40,6 @@ figure.editable textarea {
 .bs-docs-header {
     padding-bottom: 0;
 }
+#content a.github-button {
+    visibility: hidden;
+}
