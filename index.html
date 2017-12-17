@@ -30,6 +30,107 @@
                 <div class=bs-docs-section>
                     <h1 class=page-header id=lang-spec>语言规范</h1>
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/short-declairation" target="_blank">报错</a>
+                    <h2 id=short-declairation>短声明</h2>
+
+                    <div class=bs-example>
+                        在局部变量x已申明，y未声明的情况下,以下哪些写法是正确的
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+x, _ := f()
+x, _ = f()
+x, y := f()
+x, y = f()
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+x, _ := f() //incorrect
+x, _ = f() //correct
+x, y := f() //correct
+x, y = f() //incorrect
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/interface-nil" target="_blank">报错</a>
+                    <h2 id=interface-nil>interface是否等于nil的判断</h2>
+
+                    <div class=bs-example>
+                        以下代码会打印什么结果,并解释为什么 println(InitType() == nil) 有语法错误
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+type S struct{}
+
+func (s S) F() {}
+
+type IF interface {
+	F()
+}
+
+func InitType() S {
+	var s S
+	return s
+}
+
+func InitPointer() *S {
+	var s *S
+	return s
+}
+func InitEfaceType() interface{} {
+	var s S
+	return s
+}
+
+func InitEfacePointer() interface{} {
+	var s *S
+	return s
+}
+
+func InitIfaceType() IF {
+	var s S
+	return s
+}
+
+func InitIfacePointer() IF {
+	var s *S
+	return s
+}
+
+func main() {
+	//println(InitType() == nil)
+	println(InitPointer() == nil)
+	println(InitEfaceType() == nil)
+	println(InitEfacePointer() == nil)
+	println(InitIfaceType() == nil)
+	println(InitIfacePointer() == nil)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+
+                    
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/pointer" target="_blank">报错</a>
                     <h2 id=pointer>指针</h2>
 
@@ -150,8 +251,100 @@ func main() {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/for-pointer" target="_blank">报错</a>
+                    <h2 id=for-pointer>for指针</h2>
+
+                    <div class=bs-example>
+                        解释为何以下代码打印map的值都为3，并在A行附近修改代码，使打印结果为012的序列
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+const N = 3
+
+func main() {
+	m := make(map[int]*int)
+
+	for i := 0; i &lt; N; i&#43;&#43; {
+		m[i] = &amp;i //A
+	}
+
+	for _, v := range m {
+		print(*v)
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+const N = 3
+
+func main() {
+	m := make(map[int]*int)
+
+	for i := 0; i &lt; N; i&#43;&#43; {
+		j := int(i)
+		m[i] = &amp;j
+	}
+
+	for _, v := range m {
+		print(*v)
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/global-varible" target="_blank">报错</a>
+                    <h2 id=global-varible>全局变量</h2>
+
+                    <div class=bs-example>
+                        假设g为全局变量，以下哪些写法是正确的
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+var g
+var g G
+var g = G{}
+g := G{}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+var g //incorrect
+var g G //correct
+var g = G{} //correct
+g := G{} //incorrect
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-closefile" target="_blank">报错</a>
-                    <h2 id=defer-closefile>defer</h2>
+                    <h2 id=defer-closefile>defer栈</h2>
 
                     <div class=bs-example>
                         纠正下面代码的一个错误
@@ -212,74 +405,232 @@ func main() {
                     
 
                     
-                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/short-declairation" target="_blank">报错</a>
-                    <h2 id=short-declairation>短声明</h2>
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-panic" target="_blank">报错</a>
+                    <h2 id=defer-panic>panic栈</h2>
 
                     <div class=bs-example>
-                        在局部变量x已申明，y未声明的情况下,以下哪些写法是正确的
+                        以下代码会打印什么结果
                     </div>
 
                     
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func f1() {
+	defer println(&#34;f1-begin&#34;)
+	f2()
+	defer println(&#34;f1-end&#34;)
+}
+
+func f2() {
+	defer println(&#34;f2-begin&#34;)
+	f3()
+	defer println(&#34;f2-end&#34;)
+}
+
+func f3() {
+	defer println(&#34;f3-begin&#34;)
+	panic(0)
+	defer println(&#34;f3-end&#34;)
+}
+
+func main() {
+	f1()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
 
                     
-                    <figure class=highlight>
-                        <pre><code class=language-html data-lang=go>
-x, _ := f()
-x, _ = f()
-x, y := f()
-x, y = f()
-                        </code></pre>
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/defer-recover" target="_blank">报错</a>
+                    <h2 id=defer-recover>recover</h2>
+
+                    <div class=bs-example>
+                        以下代码会打印什么结果,以下代码的运行后exit code是0还是1
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import &#34;log&#34;
+
+func f() {
+	defer func() {
+		if r := recover(); r != nil {
+			log.Printf(&#34;recover:%#v&#34;, r)
+		}
+	}()
+	panic(1)
+	panic(2)
+}
+
+func main() {
+	f()
+}
+
+                        </textarea>
                     </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/goroutine-closure" target="_blank">报错</a>
+                    <h2 id=goroutine-closure>goroutine闭包</h2>
+
+                    <div class=bs-example>
+                        修改以下代码，使打印的map的长度为N=10
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			mu.Lock()
+			m[i] = i
+			mu.Unlock()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
                     
 
                     
                     <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
                     <figure class="highlight gq-anwser">
                         <pre><code class=language-html data-lang=go>
-x, _ := f() //incorrect
-x, _ = f() //correct
-x, y := f() //correct
-x, y = f() //incorrect
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			defer wg.Done()
+			mu.Lock()
+			m[i] = i
+			mu.Unlock()
+		}(i)
+	}
+	wg.Wait()
+	println(len(m))
+}
+
                             </code></pre>
                     </figure>
                     
 
                     
-                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/global-varible" target="_blank">报错</a>
-                    <h2 id=global-varible>全局变量</h2>
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/type-shadowing" target="_blank">报错</a>
+                    <h2 id=type-shadowing>receiver函数的覆盖</h2>
 
                     <div class=bs-example>
-                        假设g为全局变量，以下哪些写法是正确的
+                        以下代码会打印什么结果
                     </div>
 
                     
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+type S1 struct{}
+
+func (s1 S1) f() {
+	fmt.Println(&#34;S1.f()&#34;)
+}
+func (s1 S1) g() {
+	fmt.Println(&#34;S1.g()&#34;)
+}
+
+type S2 struct {
+	S1
+}
+
+func (s2 S2) f() {
+	fmt.Println(&#34;S2.f()&#34;)
+}
+
+type I interface {
+	f()
+}
+
+func printType(i I) {
+	fmt.Printf(&#34;%T\n&#34;, i)
+	if s1, ok := i.(S1); ok {
+		s1.f()
+		s1.g()
+	}
+	if s2, ok := i.(S2); ok {
+		s2.f()
+		s2.g()
+	}
+}
+
+func main() {
+	printType(S1{})
+	printType(S2{})
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
 
                     
-                    <figure class=highlight>
-                        <pre><code class=language-html data-lang=go>
-var g
-var g G
-var g = G{}
-g := G{}
-                        </code></pre>
-                    </figure>
-                    
 
-                    
-                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
-                    <figure class="highlight gq-anwser">
-                        <pre><code class=language-html data-lang=go>
-var g //incorrect
-var g G //correct
-var g = G{} //correct
-g := G{} //incorrect
-                            </code></pre>
-                    </figure>
                     
 
                     
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/string-bytes" target="_blank">报错</a>
-                    <h2 id=string-bytes>字符串</h2>
+                    <h2 id=string-bytes>string转换为bytes</h2>
 
                     <div class=bs-example>
                         以下代码会打印什么结果
@@ -311,6 +662,83 @@ func main() {
 
                     
 
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/mutex-map" target="_blank">报错</a>
+                    <h2 id=mutex-map>map并发操作的临界区</h2>
+
+                    <div class=bs-example>
+                        修改以下代码，使避免concurrent map writes错误
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;math/rand&#34;
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			m[rand.Int()] = rand.Int()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;math/rand&#34;
+	&#34;sync&#34;
+)
+
+const N = 10
+
+func main() {
+	m := make(map[int]int)
+
+	wg := &amp;sync.WaitGroup{}
+	mu := &amp;sync.Mutex{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func() {
+			defer wg.Done()
+			mu.Lock()
+			m[rand.Int()] = rand.Int()
+			mu.Unlock()
+		}()
+	}
+	wg.Wait()
+	println(len(m))
+}
+
+                            </code></pre>
+                    </figure>
                     
 
                     
@@ -701,17 +1129,31 @@ func main() {
                             <a href=#lang-spec>语言规范</a>
                             <ul class=nav>
                                 <li>
+                                    <a href=#short-declairation>短声明</a>
+                                </li><li>
+                                    <a href=#interface-nil>interface是否等于nil的判断</a>
+                                </li><li>
                                     <a href=#pointer>指针</a>
                                 </li><li>
                                     <a href=#empty-interface>interface{}万能指针</a>
                                 </li><li>
-                                    <a href=#defer-closefile>defer</a>
-                                </li><li>
-                                    <a href=#short-declairation>短声明</a>
+                                    <a href=#for-pointer>for指针</a>
                                 </li><li>
                                     <a href=#global-varible>全局变量</a>
                                 </li><li>
-                                    <a href=#string-bytes>字符串</a>
+                                    <a href=#defer-closefile>defer栈</a>
+                                </li><li>
+                                    <a href=#defer-panic>panic栈</a>
+                                </li><li>
+                                    <a href=#defer-recover>recover</a>
+                                </li><li>
+                                    <a href=#goroutine-closure>goroutine闭包</a>
+                                </li><li>
+                                    <a href=#type-shadowing>receiver函数的覆盖</a>
+                                </li><li>
+                                    <a href=#string-bytes>string转换为bytes</a>
+                                </li><li>
+                                    <a href=#mutex-map>map并发操作的临界区</a>
                                 </li>
                             </ul>
                         </li><li>

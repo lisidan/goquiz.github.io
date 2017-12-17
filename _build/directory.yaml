@@ -3,18 +3,32 @@ sections:
   - key: lang-spec
     name: 语言规范
     quizzes:
+      - key: short-declairation
+        name: 短声明
+      - key: interface-nil
+        name: interface是否等于nil的判断
       - key: pointer
         name: 指针
       - key: empty-interface
         name: interface{}万能指针
-      - key: defer-closefile
-        name: defer
-      - key: short-declairation
-        name: 短声明
+      - key: for-pointer
+        name: for指针
       - key: global-varible
         name: 全局变量
+      - key: defer-closefile
+        name: defer栈
+      - key: defer-panic
+        name: panic栈
+      - key: defer-recover
+        name: recover
+      - key: goroutine-closure
+        name: goroutine闭包
+      - key: type-shadowing
+        name: receiver函数的覆盖
       - key: string-bytes
-        name: 字符串
+        name: string转换为bytes
+      - key: mutex-map
+        name: map并发操作的临界区
   - key: lib-pack
     name: 标准库和包
     quizzes:
