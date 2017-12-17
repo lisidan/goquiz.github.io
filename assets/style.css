@@ -22,7 +22,12 @@
 .gq-anwser{
     display: none;
 }
-textarea {
+figure.editable{
+    background: #FFD;
+}
+figure.editable textarea {
     width: 100%;
     background: transparent;
+    border: none;
+    outline: none;
 }

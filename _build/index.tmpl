@@ -42,10 +42,10 @@
                     </div>
 
                     {{if $quiz.Main}}
-                    <figure class=highlight>
-                        <pre><code contenteditable="true" class=language-html data-lang=go>
+                    <figure class="highlight editable">
+                        <textarea rows="15">
 {{$quiz.Main}}
-                        </code></pre>
+                        </textarea>
                     </figure>
                     <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
                     {{end}}
