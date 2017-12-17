@@ -37,3 +37,6 @@ figure.editable textarea {
 .page-header {
     margin-bottom: 0;
 }
+.bs-docs-header {
+    padding-bottom: 0;
+}
