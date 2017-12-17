@@ -5,6 +5,8 @@ sections:
     quizzes:
       - key: short-declairation
         name: 短声明
+      - key: subslice-grow
+        name: subslice引用
       - key: interface-nil
         name: interface是否等于nil的判断
       - key: pointer

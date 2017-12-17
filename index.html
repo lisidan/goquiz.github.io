@@ -63,6 +63,46 @@ x, y = f() //incorrect
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/subslice-grow" target="_blank">报错</a>
+                    <h2 id=subslice-grow>subslice引用</h2>
+
+                    <div class=bs-example>
+                        以下代码会打印什么结果
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+func main() {
+	s := []int{1, 2, 3}
+	ss := s[1:]
+	for i := range ss {
+		ss[i] &#43;= 10
+	}
+	fmt.Println(s)
+	ss = append(ss, 4)
+	for i := range ss {
+		ss[i] &#43;= 10
+	}
+	fmt.Println(s)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+
+                    
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/interface-nil" target="_blank">报错</a>
                     <h2 id=interface-nil>interface是否等于nil的判断</h2>
 
@@ -1130,6 +1170,8 @@ func main() {
                             <ul class=nav>
                                 <li>
                                     <a href=#short-declairation>短声明</a>
+                                </li><li>
+                                    <a href=#subslice-grow>subslice引用</a>
                                 </li><li>
                                     <a href=#interface-nil>interface是否等于nil的判断</a>
                                 </li><li>
