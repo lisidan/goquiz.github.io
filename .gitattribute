@@ -1,0 +1,5 @@
+assets/* linguist-vendored
+index.html linguist-vendored
+favicon.ico linguist-vendored
+* linguist-vendored
+*.go linguist-vendored=false
