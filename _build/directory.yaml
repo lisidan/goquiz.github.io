@@ -3,18 +3,22 @@ sections:
   - key: lang-spec
     name: 语言规范
     quizzes:
-      - key: short-declairation
-        name: 短声明
       - key: subslice-grow
         name: subslice引用
+      - key: short-declairation
+        name: 短声明
       - key: interface-nil
         name: interface是否等于nil的判断
+      - key: map-ok-idiom
+        name: map存取数据
       - key: pointer
-        name: 指针
+        name: 指针基本操作
       - key: empty-interface
         name: interface{}万能指针
       - key: for-pointer
         name: for指针
+      - key: label-break
+        name: break外层循环
       - key: global-varible
         name: 全局变量
       - key: defer-closefile
@@ -38,6 +42,10 @@ sections:
         name: init函数
       - key: json-unmarshal
         name: json反序列化
+      - key: sync-map
+        name: map并发存取
+      - key: utf8-len
+        name: utf8字符串长度
   - key: toolchain
     name: 工具链
     quizzes:

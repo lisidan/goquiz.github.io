@@ -1,4 +1,4 @@
-# Go语言经典笔试题 
+# Go语言经典笔试题
 
 在线地址  [https://goquiz.github.io/](https://goquiz.github.io/)
 
@@ -11,12 +11,14 @@
 # 目录
 
 [语言规范](https://goquiz.github.io/#lang-spec)
-- [短声明](https://goquiz.github.io/#short-declairation)
 - [subslice引用](https://goquiz.github.io/#subslice-grow)
+- [短声明](https://goquiz.github.io/#short-declairation)
 - [interface是否等于nil的判断](https://goquiz.github.io/#interface-nil)
-- [指针](https://goquiz.github.io/#pointer)
+- [map存取数据](https://goquiz.github.io/#map-ok-idiom)
+- [指针基本操作](https://goquiz.github.io/#pointer)
 - [interface{}万能指针](https://goquiz.github.io/#empty-interface)
 - [for指针](https://goquiz.github.io/#for-pointer)
+- [break外层循环](https://goquiz.github.io/#label-break)
 - [全局变量](https://goquiz.github.io/#global-varible)
 - [defer栈](https://goquiz.github.io/#defer-closefile)
 - [panic栈](https://goquiz.github.io/#defer-panic)
@@ -29,6 +31,8 @@
 [标准库和包](https://goquiz.github.io/#lib-pack)
 - [init函数](https://goquiz.github.io/#init-import)
 - [json反序列化](https://goquiz.github.io/#json-unmarshal)
+- [map并发存取](https://goquiz.github.io/#sync-map)
+- [utf8字符串长度](https://goquiz.github.io/#utf8-len)
 
 [工具链](https://goquiz.github.io/#toolchain)
 - [gcflags参数](https://goquiz.github.io/#gcflags)

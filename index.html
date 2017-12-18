@@ -30,39 +30,6 @@
                 <div class=bs-docs-section>
                     <h1 class=page-header id=lang-spec>语言规范</h1>
                     
-                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/short-declairation" target="_blank">报错</a>
-                    <h2 id=short-declairation>短声明</h2>
-
-                    <div class=bs-example>
-                        在局部变量x已申明，y未声明的情况下,以下哪些写法是正确的
-                    </div>
-
-                    
-
-                    
-                    <figure class=highlight>
-                        <pre><code class=language-html data-lang=go>
-x, _ := f()
-x, _ = f()
-x, y := f()
-x, y = f()
-                        </code></pre>
-                    </figure>
-                    
-
-                    
-                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
-                    <figure class="highlight gq-anwser">
-                        <pre><code class=language-html data-lang=go>
-x, _ := f() //incorrect
-x, _ = f() //correct
-x, y := f() //correct
-x, y = f() //incorrect
-                            </code></pre>
-                    </figure>
-                    
-
-                    
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/subslice-grow" target="_blank">报错</a>
                     <h2 id=subslice-grow>subslice引用</h2>
 
@@ -100,6 +67,39 @@ func main() {
 
                     
 
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/short-declairation" target="_blank">报错</a>
+                    <h2 id=short-declairation>短声明</h2>
+
+                    <div class=bs-example>
+                        在局部变量x已申明，y未声明的情况下,以下哪些写法是正确的
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+x, _ := f()
+x, _ = f()
+x, y := f()
+x, y = f()
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+x, _ := f() //incorrect
+x, _ = f() //correct
+x, y := f() //correct
+x, y = f() //incorrect
+                            </code></pre>
+                    </figure>
                     
 
                     
@@ -171,8 +171,54 @@ func main() {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/map-ok-idiom" target="_blank">报错</a>
+                    <h2 id=map-ok-idiom>map存取数据</h2>
+
+                    <div class=bs-example>
+                        在以下AB两行修改代码，用正确的用法存取map数据
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func main() {
+	var m map[string]int //A
+	m[&#34;a&#34;] = 1
+	if v := m[&#34;b&#34;]; v != nil { //B
+		println(v)
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+func main() {
+	m := make(map[string]int)
+	m[&#34;a&#34;] = 1
+	if v, ok := m[&#34;b&#34;]; ok {
+		println(v)
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                     <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/pointer" target="_blank">报错</a>
-                    <h2 id=pointer>指针</h2>
+                    <h2 id=pointer>指针基本操作</h2>
 
                     <div class=bs-example>
                         在以下AB两行补全代码，使运行结果打印&#34;foo&#34;
@@ -342,6 +388,57 @@ func main() {
 
 	for _, v := range m {
 		print(*v)
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lang-spec/label-break" target="_blank">报错</a>
+                    <h2 id=label-break>break外层循环</h2>
+
+                    <div class=bs-example>
+                        修改以下代码，使程序只打印0,0后就break到最外层的for
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+func main() {
+	for i := 0; i &lt; 3; i&#43;&#43; {
+		for j := 0; j &lt; 3; j&#43;&#43; {
+			print(i, &#34;,&#34;, j, &#34; &#34;)
+			break
+		}
+		println()
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+func main() {
+outer:
+	for i := 0; i &lt; 3; i&#43;&#43; {
+		for j := 0; j &lt; 3; j&#43;&#43; {
+			print(i, &#34;,&#34;, j, &#34; &#34;)
+			break outer
+		}
+		println()
 	}
 }
 
@@ -930,6 +1027,121 @@ func main() {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/sync-map" target="_blank">报错</a>
+                    <h2 id=sync-map>map并发存取</h2>
+
+                    <div class=bs-example>
+                        修改以下代码AB两行，使变量m可以在goroutine里存取数据，并不会导致concurrent map writes错误
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 100
+
+func main() {
+	m := &amp;map[int]int{} //A
+	wg := &amp;sync.WaitGroup{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			(*m)[i] = i //B
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;sync&#34;
+)
+
+const N = 100
+
+func main() {
+	m := &amp;sync.Map{}
+	wg := &amp;sync.WaitGroup{}
+	wg.Add(N)
+	for i := 0; i &lt; N; i&#43;&#43; {
+		go func(i int) {
+			m.Store(i, i)
+			wg.Done()
+		}(i)
+	}
+	wg.Wait()
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/utf8-len" target="_blank">报错</a>
+                    <h2 id=utf8-len>utf8字符串长度</h2>
+
+                    <div class=bs-example>
+                        修改下面代码以显示正确的utf8字符长度
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+)
+
+func main() {
+	fmt.Println(len(&#34;你好&#34;))
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;unicode/utf8&#34;
+)
+
+func main() {
+	fmt.Println(utf8.RuneCountInString(&#34;你好&#34;))
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=toolchain>工具链</h1>
                     
@@ -1169,17 +1381,21 @@ func main() {
                             <a href=#lang-spec>语言规范</a>
                             <ul class=nav>
                                 <li>
-                                    <a href=#short-declairation>短声明</a>
-                                </li><li>
                                     <a href=#subslice-grow>subslice引用</a>
+                                </li><li>
+                                    <a href=#short-declairation>短声明</a>
                                 </li><li>
                                     <a href=#interface-nil>interface是否等于nil的判断</a>
                                 </li><li>
-                                    <a href=#pointer>指针</a>
+                                    <a href=#map-ok-idiom>map存取数据</a>
+                                </li><li>
+                                    <a href=#pointer>指针基本操作</a>
                                 </li><li>
                                     <a href=#empty-interface>interface{}万能指针</a>
                                 </li><li>
                                     <a href=#for-pointer>for指针</a>
+                                </li><li>
+                                    <a href=#label-break>break外层循环</a>
                                 </li><li>
                                     <a href=#global-varible>全局变量</a>
                                 </li><li>
@@ -1205,6 +1421,10 @@ func main() {
                                     <a href=#init-import>init函数</a>
                                 </li><li>
                                     <a href=#json-unmarshal>json反序列化</a>
+                                </li><li>
+                                    <a href=#sync-map>map并发存取</a>
+                                </li><li>
+                                    <a href=#utf8-len>utf8字符串长度</a>
                                 </li>
                             </ul>
                         </li><li>

@@ -1,0 +1,1 @@
+修改以下代码AB两行，使变量m可以在goroutine里存取数据，并不会导致concurrent map writes错误
