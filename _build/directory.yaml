@@ -35,6 +35,14 @@ sections:
         name: string转换为bytes
       - key: mutex-map
         name: map并发操作的临界区
+      - key: DeepEqual
+        name: 深相等
+      - key: Gosched
+        name: goroutine让先
+      - key: map-addressing
+        name: map的值的内部字段可修改性
+      - key: sort-Slice
+        name: Struct的Slice的排序
   - key: lib-pack
     name: 标准库和包
     quizzes:
@@ -46,6 +54,8 @@ sections:
         name: map并发存取
       - key: utf8-len
         name: utf8字符串长度
+      - key: regex-multiline
+        name: 正则表达式的多行匹配
   - key: toolchain
     name: 工具链
     quizzes:
@@ -55,6 +65,8 @@ sections:
         name: benchmark次数变量
       - key: govendor-gopath
         name: govendor路径覆盖
+      - key: GOMAXPROCS
+        name: GOMAXPROCS
   - key: internals
     name: 内部原理
     quizzes:
@@ -62,3 +74,7 @@ sections:
         name: string内部结构
       - key: unsafe-slice-array
         name: slice内部结构
+      - key: defer-overhead
+        name: defer的性能成本
+      - key: map-malloc
+        name: map的malloc阈值容量

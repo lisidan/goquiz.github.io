@@ -1,0 +1,1 @@
+默认为128，通过修改runtime.hashmap的maxKeySize和maxValueSize可以调整
