@@ -1,12 +1,14 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 	"html/template"
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
 
 	yaml "gopkg.in/yaml.v2"
 )
@@ -70,20 +72,38 @@ func buildHTML(directory, tmpl string) {
 	}
 }
 
-func buildREADME(directory string) {
+func buildREADME(directory string) string {
 	sections := *loadDirectory(directory)
+	var buf bytes.Buffer
 	for _, section := range sections.Sections {
-		fmt.Fprintf(os.Stdout, "[%s](https://goquiz.github.io/#%s)\n", section.Name, section.Key)
+		buf.WriteString(fmt.Sprintf("[%s](https://goquiz.github.io/#%s)\n", section.Name, section.Key))
 		for _, quiz := range section.Quizzes {
-			fmt.Fprintf(os.Stdout, "- [%s](https://goquiz.github.io/#%s)\n", quiz.Name, quiz.Key)
+			buf.WriteString(fmt.Sprintf("- [%s](https://goquiz.github.io/#%s)\n", quiz.Name, quiz.Key))
 		}
-		fmt.Fprintln(os.Stdout)
+		buf.WriteString("\n")
 	}
+	return buf.String()
+}
+
+func replaceREADME(file string) (string, string) {
+	b, err := ioutil.ReadFile(file)
+	if err != nil {
+		log.Fatalln("Cannot load README from " + file)
+	}
+	s := string(b)
+	pattern := regexp.MustCompile("(?m:\\[CATEGORY_(START|END)\\]: <>)")
+	ss := pattern.Split(s, -1)
+	if len(ss) != 3 {
+		println(len(ss))
+		log.Fatalln("Cannot locate category in " + file)
+	}
+	return ss[0] + "[CATEGORY_START]: <>", "[CATEGORY_END]: <>" + ss[2]
 }
 
 func main() {
 	directory := flag.String("d", "directory.yaml", "directory.yaml")
 	tmpl := flag.String("t", "index.tmpl", "index.tmpl")
+	readme := flag.String("readme", "../README.md", "README.md")
 	cmd := flag.String("cmd", "html", "html|readme")
 
 	flag.Parse()
@@ -91,7 +111,11 @@ func main() {
 	case "html":
 		buildHTML(*directory, *tmpl)
 	case "readme":
-		buildREADME(*directory)
+		replacement := buildREADME(*directory)
+		before, after := replaceREADME(*readme)
+		fmt.Fprintln(os.Stdout, before)
+		fmt.Fprintln(os.Stdout, replacement)
+		fmt.Fprint(os.Stdout, after)
 	default:
 		log.Fatalf("Please specify a valid cmd (e.g. html|readme)")
 	}

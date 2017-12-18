@@ -10,6 +10,7 @@
 
 # 目录
 
+[CATEGORY_START]: <>
 [语言规范](https://goquiz.github.io/#lang-spec)
 - [subslice引用](https://goquiz.github.io/#subslice-grow)
 - [短声明](https://goquiz.github.io/#short-declairation)
@@ -43,10 +44,13 @@
 - [string内部结构](https://goquiz.github.io/#unsafe-bytes-string)
 - [slice内部结构](https://goquiz.github.io/#unsafe-slice-array)
 
+
+[CATEGORY_END]: <>
+
 # 如何在本地Build
 
 Prerequisites: `"gopkg.in/yaml.v2"`
 
     cd _build
-    make
-
+    make html
+    make readme
