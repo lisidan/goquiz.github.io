@@ -91,13 +91,13 @@ func replaceREADME(file string) (string, string) {
 		log.Fatalln("Cannot load README from " + file)
 	}
 	s := string(b)
-	pattern := regexp.MustCompile("(?m:\\[CATEGORY_(START|END)\\]: <>)")
+	pattern := regexp.MustCompile("<!--CATEGORY_(BEGIN|END)-->")
 	ss := pattern.Split(s, -1)
 	if len(ss) != 3 {
 		println(len(ss))
 		log.Fatalln("Cannot locate category in " + file)
 	}
-	return ss[0] + "[CATEGORY_START]: <>", "[CATEGORY_END]: <>" + ss[2]
+	return ss[0] + "<!--CATEGORY_BEGIN-->\n", "<!--CATEGORY_END-->" + ss[2]
 }
 
 func main() {

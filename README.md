@@ -10,7 +10,8 @@
 
 # 目录
 
-[CATEGORY_START]: <>
+<!--CATEGORY_BEGIN-->
+
 [语言规范](https://goquiz.github.io/#lang-spec)
 - [subslice引用](https://goquiz.github.io/#subslice-grow)
 - [短声明](https://goquiz.github.io/#short-declairation)
@@ -53,7 +54,7 @@
 - [map的malloc阈值容量](https://goquiz.github.io/#map-malloc)
 
 
-[CATEGORY_END]: <>
+<!--CATEGORY_END-->
 
 # 如何在本地Build
 
