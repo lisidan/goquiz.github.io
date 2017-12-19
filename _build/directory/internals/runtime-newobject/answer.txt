@@ -1,0 +1,1 @@
+runtime.newobject()函数的作用是分配堆内存。当编译器做优化的时候，make和new所在的函数有可能被inline掉，所以不是一定会导致分配堆内存。

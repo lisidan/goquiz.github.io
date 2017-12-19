@@ -52,6 +52,8 @@
 - [slice内部结构](https://goquiz.github.io/#unsafe-slice-array)
 - [defer的性能成本](https://goquiz.github.io/#defer-overhead)
 - [map的malloc阈值容量](https://goquiz.github.io/#map-malloc)
+- [内存分配](https://goquiz.github.io/#runtime-newobject)
+- [SSA](https://goquiz.github.io/#SSA)
 
 
 <!--CATEGORY_END-->

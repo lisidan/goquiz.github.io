@@ -78,3 +78,7 @@ sections:
         name: defer的性能成本
       - key: map-malloc
         name: map的malloc阈值容量
+      - key: runtime-newobject
+        name: 内存分配
+      - key: SSA
+        name: SSA

@@ -1799,6 +1799,52 @@ runtime.deferreturn: 取回 context
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/runtime-newobject" target="_blank">报错</a>
+                    <h2 id=runtime-newobject>内存分配</h2>
+
+                    <div class=bs-example>
+                        runtime.newobject()函数的作用是什么。是否make和new一定会调用runtime.newobject().
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+runtime.newobject()函数的作用是分配堆内存。当编译器做优化的时候，make和new所在的函数有可能被inline掉，所以不是一定会导致分配堆内存。
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/SSA" target="_blank">报错</a>
+                    <h2 id=SSA>SSA</h2>
+
+                    <div class=bs-example>
+                        简要介绍SSA(Static Single Assignment)有哪些好处
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+消除不会被执行的代码
+消除冗余变量和逻辑
+优化寄存器分配
+将变量尽可能优化成常量
+将高成本的指令优化成低成本的指令
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div>
             </div>
 
@@ -1889,6 +1935,10 @@ runtime.deferreturn: 取回 context
                                     <a href=#defer-overhead>defer的性能成本</a>
                                 </li><li>
                                     <a href=#map-malloc>map的malloc阈值容量</a>
+                                </li><li>
+                                    <a href=#runtime-newobject>内存分配</a>
+                                </li><li>
+                                    <a href=#SSA>SSA</a>
                                 </li>
                             </ul>
                         </li>
