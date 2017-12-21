@@ -43,3 +43,7 @@ figure.editable textarea {
 #content a.github-button {
     visibility: hidden;
 }
+div.gq-question{
+    white-space: pre-line;
+    padding-top: 0;
+}
