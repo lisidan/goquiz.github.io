@@ -16,7 +16,7 @@ sections:
       - key: empty-interface
         name: interface{}万能指针
       - key: for-pointer
-        name: for指针
+        name: 临时变量的指针
       - key: label-break
         name: break外层循环
       - key: global-varible
@@ -28,15 +28,15 @@ sections:
       - key: defer-recover
         name: recover
       - key: goroutine-closure
-        name: goroutine闭包
+        name: goroutine闭包参数
       - key: type-shadowing
-        name: receiver函数的覆盖
+        name: receiver函数的"仿重载"
       - key: string-bytes
         name: string转换为bytes
       - key: mutex-map
         name: map并发操作的临界区
       - key: DeepEqual
-        name: 深相等
+        name: 深度比较
       - key: Gosched
         name: goroutine让先
       - key: map-addressing
@@ -55,7 +55,7 @@ sections:
       - key: utf8-len
         name: utf8字符串长度
       - key: regex-multiline
-        name: 正则表达式的多行匹配
+        name: 正则表达式的高级模式
   - key: toolchain
     name: 工具链
     quizzes:
