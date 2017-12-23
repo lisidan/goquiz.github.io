@@ -1612,6 +1612,95 @@ GOMAXPROCS=2时打印a-z中会参杂打印A-Z
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/shared-object" target="_blank">报错</a>
+                    <h2 id=shared-object>共享库</h2>
+
+                    <div class="bs-example gq-question">
+                        1. 将以下代码文件中str.go编译成str.so需要执行什么命令才能使其被build成共享库
+2. 补全main.go代码中A行中缺失的部分
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+// str.go
+package main
+
+import &#34;strings&#34;
+
+func UpperCase(s string) string {
+	return strings.ToUpper(s)
+}
+
+
+// main.go
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;log&#34;
+	&#34;plugin&#34;
+)
+
+func main() {
+	p, err := plugin.Open(&#34;str.so&#34;)
+	if err != nil {
+		log.Panicf(&#34;plugin.Open: %s\n&#34;, err)
+	}
+	f, err := p.Lookup(&#34;UpperCase&#34;)
+	if err != nil {
+		log.Panicf(&#34;Lookup UpperCase: %s\n&#34;, err)
+	}
+	UpperCase, ok := ___ // A
+	if !ok {
+		log.Panicf(&#34;UpperCase assertion: %s\n&#34;, err)
+	}
+	s := UpperCase(&#34;hello&#34;)
+	fmt.Println(s)
+}
+
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+go build -buildmode=plugin -o str.so str.go
+
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;log&#34;
+	&#34;plugin&#34;
+)
+
+func main() {
+	p, err := plugin.Open(&#34;str.so&#34;)
+	if err != nil {
+		log.Panicf(&#34;plugin.Open: %s\n&#34;, err)
+	}
+	f, err := p.Lookup(&#34;UpperCase&#34;)
+	if err != nil {
+		log.Panicf(&#34;Lookup UpperCase: %s\n&#34;, err)
+	}
+	UpperCase, ok := f.(func(string) string)
+	if !ok {
+		log.Panicf(&#34;UpperCase assertion: %s\n&#34;, err)
+	}
+	s := UpperCase(&#34;hello&#34;)
+	fmt.Println(s)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=internals>内部原理</h1>
                     
@@ -1845,6 +1934,70 @@ runtime.newobject()函数的作用是分配堆内存。当编译器做优化的�
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/AST" target="_blank">报错</a>
+                    <h2 id=AST>AST</h2>
+
+                    <div class="bs-example gq-question">
+                        以下代码会打印什么结果。（提示:打印结果的格式如下，只需在下划线出补全剩余结果）
+*ast.File:
+        ____: ____
+        *ast.GenDecl:
+                *ast.ValueSpec:
+                        ____: ____
+                        ____: ____
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;go/ast&#34;
+	&#34;go/parser&#34;
+	&#34;go/token&#34;
+	&#34;log&#34;
+	&#34;strings&#34;
+)
+
+func main() {
+	fs := token.NewFileSet()
+	f, err := parser.ParseFile(fs, &#34;&#34;, &#34;package main; var a = 0&#34;, parser.AllErrors)
+	if err != nil {
+		log.Fatal(err)
+	}
+	var v visitor
+	ast.Walk(v, f)
+}
+
+type visitor int
+
+func (v visitor) Visit(n ast.Node) ast.Visitor {
+	if n == nil {
+		return nil
+	}
+	var s string
+	switch node := n.(type) {
+	case *ast.Ident:
+		s = node.Name
+	case *ast.BasicLit:
+		s = node.Value
+	}
+	fmt.Printf(&#34;%s%T: %s\n&#34;, strings.Repeat(&#34;\t&#34;, int(v)), n, s)
+	return v &#43; 1
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+
+                    
                 </div>
             </div>
 
@@ -1922,6 +2075,8 @@ runtime.newobject()函数的作用是分配堆内存。当编译器做优化的�
                                     <a href=#govendor-gopath>govendor路径覆盖</a>
                                 </li><li>
                                     <a href=#GOMAXPROCS>GOMAXPROCS</a>
+                                </li><li>
+                                    <a href=#shared-object>共享库</a>
                                 </li>
                             </ul>
                         </li><li>
@@ -1939,6 +2094,8 @@ runtime.newobject()函数的作用是分配堆内存。当编译器做优化的�
                                     <a href=#runtime-newobject>内存分配</a>
                                 </li><li>
                                     <a href=#SSA>SSA</a>
+                                </li><li>
+                                    <a href=#AST>AST</a>
                                 </li>
                             </ul>
                         </li>

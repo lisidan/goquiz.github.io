@@ -67,6 +67,8 @@ sections:
         name: govendor路径覆盖
       - key: GOMAXPROCS
         name: GOMAXPROCS
+      - key: shared-object
+        name: 共享库
   - key: internals
     name: 内部原理
     quizzes:
@@ -82,3 +84,5 @@ sections:
         name: 内存分配
       - key: SSA
         name: SSA
+      - key: AST
+        name: AST

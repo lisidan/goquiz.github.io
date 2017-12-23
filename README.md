@@ -46,6 +46,7 @@
 - [benchmark次数变量](https://goquiz.github.io/#benchmark-N)
 - [govendor路径覆盖](https://goquiz.github.io/#govendor-gopath)
 - [GOMAXPROCS](https://goquiz.github.io/#GOMAXPROCS)
+- [共享库](https://goquiz.github.io/#shared-object)
 
 [内部原理](https://goquiz.github.io/#internals)
 - [string内部结构](https://goquiz.github.io/#unsafe-bytes-string)
@@ -54,6 +55,7 @@
 - [map的malloc阈值容量](https://goquiz.github.io/#map-malloc)
 - [内存分配](https://goquiz.github.io/#runtime-newobject)
 - [SSA](https://goquiz.github.io/#SSA)
+- [AST](https://goquiz.github.io/#AST)
 
 
 <!--CATEGORY_END-->
