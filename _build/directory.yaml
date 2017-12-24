@@ -56,6 +56,22 @@ sections:
         name: utf8字符串长度
       - key: regex-multiline
         name: 正则表达式的高级模式
+      - key: readline
+        name: 文本文件的行遍历
+      - key: container-heap
+        name: 堆容器
+      - key: context-withtimeout
+        name: context超时
+      - key: flag
+        name: 命令行参数解析
+      - key: text-template
+        name: 文本模版
+      - key: html-template
+        name: html模版
+      - key: http-server
+        name: http服务
+      - key: sql-query
+        name: sql查询
   - key: toolchain
     name: 工具链
     quizzes:

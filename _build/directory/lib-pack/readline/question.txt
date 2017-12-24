@@ -1,0 +1,6 @@
+遍历一个文本文件的每一行，以下函数分别有什么区别，哪个最合适
+
+fmt.Fscanf()
+bufio.Reader.ReadLine()
+bufio.ReadString('\n')
+bufio.Scanner.Scan()

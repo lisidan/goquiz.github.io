@@ -1,0 +1,16 @@
+age := 27
+rows, err := db.Query("SELECT name FROM users WHERE age=?", age)
+if err != nil {
+        log.Fatal(err)
+}
+defer ___ // A
+for ___ { //B
+        var name string
+        if err := ___; err != nil { //C
+                log.Fatal(err)
+        }
+        fmt.Printf("%s is %d\n", name, age)
+}
+if err := ___; err != nil { //D
+        log.Fatal(err)
+}

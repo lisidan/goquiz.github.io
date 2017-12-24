@@ -1,0 +1,1 @@
+html/template和text/template的接口完全一致，html/template增加了对于html生成的安全保护机制

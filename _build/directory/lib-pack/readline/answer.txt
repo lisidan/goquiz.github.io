@@ -1,0 +1,4 @@
+bufio.Scanner.Scan(): 最合适
+fmt.Fscanf(): 只适用于格式化文本
+bufio.Reader.ReadLine(): 底层函数，当行长度超过buffer上限时需要调用多次
+bufio.ReadString('\n'): 不能处理EOF

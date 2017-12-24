@@ -1,0 +1,1 @@
+补全以下A行的代码，使创建一个有2秒timeout的context变量，即最后打印的结果为"waited for 1 sec"

@@ -1,0 +1,1 @@
+html/template和text/template有什么异同

@@ -1467,6 +1467,453 @@ func main() {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/readline" target="_blank">报错</a>
+                    <h2 id=readline>文本文件的行遍历</h2>
+
+                    <div class="bs-example gq-question">
+                        遍历一个文本文件的每一行，以下函数分别有什么区别，哪个最合适
+
+fmt.Fscanf()
+bufio.Reader.ReadLine()
+bufio.ReadString(&#39;\n&#39;)
+bufio.Scanner.Scan()
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+bufio.Scanner.Scan(): 最合适
+fmt.Fscanf(): 只适用于格式化文本
+bufio.Reader.ReadLine(): 底层函数，当行长度超过buffer上限时需要调用多次
+bufio.ReadString(&#39;\n&#39;): 不能处理EOF
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/container-heap" target="_blank">报错</a>
+                    <h2 id=container-heap>堆容器</h2>
+
+                    <div class="bs-example gq-question">
+                        以下程序的打印结果是什么
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;container/heap&#34;
+	&#34;fmt&#34;
+)
+
+type IntHeap []int
+
+func (h IntHeap) Len() int           { return len(h) }
+func (h IntHeap) Less(i, j int) bool { return h[i] &lt; h[j] }
+func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
+
+func (h *IntHeap) Push(x interface{}) {
+	*h = append(*h, x.(int))
+}
+
+func (h *IntHeap) Pop() interface{} {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
+func main() {
+	h := &amp;IntHeap{2, 1, 5}
+	heap.Init(h)
+	for h.Len() &gt; 0 {
+		fmt.Printf(&#34;%d &#34;, heap.Pop(h))
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/context-withtimeout" target="_blank">报错</a>
+                    <h2 id=context-withtimeout>context超时</h2>
+
+                    <div class="bs-example gq-question">
+                        补全以下A行的代码，使创建一个有2秒timeout的context变量，即最后打印的结果为&#34;waited for 1 sec&#34;
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;context&#34;
+	&#34;fmt&#34;
+	&#34;time&#34;
+)
+
+func main() {
+	timeout := 2 * time.Second
+	ctx, cancel := ___ // A
+	defer cancel()
+
+	select {
+	case &lt;-time.After(1 * time.Second):
+		fmt.Println(&#34;waited for 1 sec&#34;)
+	case &lt;-ctx.Done():
+		fmt.Println(ctx.Err())
+	}
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;context&#34;
+	&#34;fmt&#34;
+	&#34;time&#34;
+)
+
+func main() {
+	timeout := 2 * time.Second
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	select {
+	case &lt;-time.After(1 * time.Second):
+		fmt.Println(&#34;waited for 1 sec&#34;)
+	case &lt;-ctx.Done():
+		fmt.Println(ctx.Err())
+	}
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/flag" target="_blank">报错</a>
+                    <h2 id=flag>命令行参数解析</h2>
+
+                    <div class="bs-example gq-question">
+                        补全init()中AB两行，使变量ip接受命令行参数ip，变量port接受命令行参数port，并使程序在零参数的情况下打印0.0.0.0:8000。
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import &#34;flag&#34;
+import &#34;fmt&#34;
+
+var ip string
+var port int
+
+func init() {
+	// A
+	// B
+}
+
+func main() {
+	flag.Parse()
+	fmt.Printf(&#34;%s:%d&#34;, ip, port)
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import &#34;flag&#34;
+import &#34;fmt&#34;
+
+var ip string
+var port int
+
+func init() {
+	flag.StringVar(&amp;ip, &#34;ip&#34;, &#34;0.0.0.0&#34;, &#34;ip address&#34;)
+	flag.IntVar(&amp;port, &#34;port&#34;, 8000, &#34;port number&#34;)
+}
+
+func main() {
+	flag.Parse()
+	fmt.Printf(&#34;%s:%d&#34;, ip, port)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/text-template" target="_blank">报错</a>
+                    <h2 id=text-template>文本模版</h2>
+
+                    <div class="bs-example gq-question">
+                        补全A行的tpl的模版内容，使起能生成最多三层Tree的内容，即最终输出结果为
+A
+ B
+  C
+ D
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;log&#34;
+	&#34;os&#34;
+	&#34;text/template&#34;
+)
+
+func main() {
+	const tpl = `
+
+` // A
+
+	type Tree struct {
+		Name     string
+		Children []Tree
+	}
+	root := Tree{
+		&#34;A&#34;, []Tree{
+			Tree{&#34;B&#34;, []Tree{
+				Tree{&#34;C&#34;, []Tree{}},
+			}},
+			Tree{&#34;D&#34;, []Tree{}},
+		},
+	}
+
+	t := template.Must(template.New(&#34;tree&#34;).Parse(tpl))
+
+	err := t.Execute(os.Stdout, root)
+	if err != nil {
+		log.Fatalf(&#34;executing template:&#34;, err)
+	}
+
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;log&#34;
+	&#34;os&#34;
+	&#34;text/template&#34;
+)
+
+func main() {
+	const tpl = `{{.Name}}{{range $child := .Children}}
+ {{$child.Name}}{{range $grandchild := $child.Children}}
+  {{$grandchild.Name}}{{end}}{{end}}
+` // A
+
+	type Tree struct {
+		Name     string
+		Children []Tree
+	}
+	root := Tree{
+		&#34;A&#34;, []Tree{
+			Tree{&#34;B&#34;, []Tree{
+				Tree{&#34;C&#34;, []Tree{}},
+			}},
+			Tree{&#34;D&#34;, []Tree{}},
+		},
+	}
+
+	t := template.Must(template.New(&#34;tree&#34;).Parse(tpl))
+
+	err := t.Execute(os.Stdout, root)
+	if err != nil {
+		log.Fatalf(&#34;executing template:&#34;, err)
+	}
+
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/html-template" target="_blank">报错</a>
+                    <h2 id=html-template>html模版</h2>
+
+                    <div class="bs-example gq-question">
+                        html/template和text/template有什么异同
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+html/template和text/template的接口完全一致，html/template增加了对于html生成的安全保护机制
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/http-server" target="_blank">报错</a>
+                    <h2 id=http-server>http服务</h2>
+
+                    <div class="bs-example gq-question">
+                        在以下AB两行补全代码，使程序启动一个http服务在8000端口，对所有请求都输出响应hello
+                    </div>
+
+                    
+                    <figure class="highlight editable">
+                        <textarea rows="15">
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;net/http&#34;
+)
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc(&#34;/&#34;, func(w http.ResponseWriter, req *http.Request) {
+		___ //A
+	})
+	// B
+}
+
+                        </textarea>
+                    </figure>
+                    <button type="button" class="btn btn-primary gq-run-btn">运行代码</button>
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+package main
+
+import (
+	&#34;fmt&#34;
+	&#34;net/http&#34;
+)
+
+func main() {
+	mux := http.NewServeMux()
+	mux.HandleFunc(&#34;/&#34;, func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprintf(w, &#34;hello&#34;)
+	})
+	http.ListenAndServe(&#34;:8000&#34;, mux)
+}
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/lib-pack/sql-query" target="_blank">报错</a>
+                    <h2 id=sql-query>sql查询</h2>
+
+                    <div class="bs-example gq-question">
+                        在以下ABCD四行空缺处补上代码，使程序遍历并打印所有结果，并打印可能的报错
+                    </div>
+
+                    
+
+                    
+                    <figure class=highlight>
+                        <pre><code class=language-html data-lang=go>
+age := 27
+rows, err := db.Query(&#34;SELECT name FROM users WHERE age=?&#34;, age)
+if err != nil {
+        log.Fatal(err)
+}
+defer ___ // A
+for ___ { //B
+        var name string
+        if err := ___; err != nil { //C
+                log.Fatal(err)
+        }
+        fmt.Printf(&#34;%s is %d\n&#34;, name, age)
+}
+if err := ___; err != nil { //D
+        log.Fatal(err)
+}
+                        </code></pre>
+                    </figure>
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+age := 27
+rows, err := db.Query(&#34;SELECT name FROM users WHERE age=?&#34;, age)
+if err != nil {
+        log.Fatal(err)
+}
+defer rows.Close()
+for rows.Next() {
+        var name string
+        if err := rows.Scan(&amp;name); err != nil {
+                log.Fatal(err)
+        }
+        fmt.Printf(&#34;%s is %d\n&#34;, name, age)
+}
+if err := rows.Err(); err != nil {
+        log.Fatal(err)
+}
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=toolchain>工具链</h1>
                     
@@ -2070,6 +2517,22 @@ func (v visitor) Visit(n ast.Node) ast.Visitor {
                                     <a href=#utf8-len>utf8字符串长度</a>
                                 </li><li>
                                     <a href=#regex-multiline>正则表达式的高级模式</a>
+                                </li><li>
+                                    <a href=#readline>文本文件的行遍历</a>
+                                </li><li>
+                                    <a href=#container-heap>堆容器</a>
+                                </li><li>
+                                    <a href=#context-withtimeout>context超时</a>
+                                </li><li>
+                                    <a href=#flag>命令行参数解析</a>
+                                </li><li>
+                                    <a href=#text-template>文本模版</a>
+                                </li><li>
+                                    <a href=#html-template>html模版</a>
+                                </li><li>
+                                    <a href=#http-server>http服务</a>
+                                </li><li>
+                                    <a href=#sql-query>sql查询</a>
                                 </li>
                             </ul>
                         </li><li>
