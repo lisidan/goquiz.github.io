@@ -1,0 +1,2 @@
+C.sleep直接调用sleep syscall,会导致操作系统生成闲置线程
+time.Sleep对goroutine进行了优化,并未使用sleep syscall

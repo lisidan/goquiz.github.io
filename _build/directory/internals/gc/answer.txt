@@ -1,0 +1,6 @@
+MarkWorker goroutine循环扫描所有对象并使用白灰黑三色分别标记不可达对象，待定对象，可达对象，直至确定所有的可达对象(即没有灰色对象)。
+编译器在写操作时特意插入的一段代码即write barrier，以实时监控所有用户goroutine对heap的修改
+执行Stop the world: scheduler休眠M(线程)并抢占所有G(goroutine)队列
+回收不可达对象以供heap或者central重用
+如果有整块的span内存被回收，在一定条件下可以release给操作系统
+执行Start the world，唤醒P(cpu core)和M(线程) 继续执行G(goroutine)队列

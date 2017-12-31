@@ -1,3 +1,2 @@
-runtime.deferproc: 拷贝 context
-runtime.deferreturn: 取回 context
-合并 defer栈
+runtime.deferproc会导致栈上下文拷贝操作
+runtime.deferreturn会导致栈上下文取回操作

@@ -102,3 +102,19 @@ sections:
         name: SSA
       - key: AST
         name: AST
+      - key: bootstrap
+        name: Go引导过程
+      - key: channel-sync-async
+        name: channel同步异步的区别
+      - key: finalizer
+        name: 析构函数
+      - key: gc
+        name: gc工作机制
+      - key: goroutine-sleep
+        name: goroutine休眠
+      - key: object-memory
+        name: 内存分配过程
+      - key: stack-heap
+        name: stack和heap内存分配判定
+      - key: stop-goroutine
+        name: goroutine暂停或者终止

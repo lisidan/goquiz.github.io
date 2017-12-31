@@ -1,0 +1,5 @@
+执行src/runtime/目录下平台相关的汇编引导程序
+runtime·args():格式化CLI参数
+runtime·osinit():初始化CPU core
+runtime·schedinit(): 初始化goroutine上限,栈内存,malloc,CLI参数,环境变量,debug参数,gc,GOMAXPROCS
+runtime·mstart():启动gc monitor,enable gc,import所有依赖并执行相关init函数,执行main.main()

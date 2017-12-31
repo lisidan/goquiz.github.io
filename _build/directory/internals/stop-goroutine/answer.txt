@@ -1,0 +1,4 @@
+runtime.Gosched: 让出CPU core并重新加入goroutine队列,并稍后会自动继续执行
+runtime.gopark: 使goroutine进入等待状态直至参数里的回调函数unlockf返回false才可继续执行
+runtime.notesleep: 直接休眠M(线程)
+runtime.Goexit:终止G(goroutine),并调用G.defer,并且并不会导致panic

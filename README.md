@@ -64,6 +64,14 @@
 - [内存分配](https://goquiz.github.io/#runtime-newobject)
 - [SSA](https://goquiz.github.io/#SSA)
 - [AST](https://goquiz.github.io/#AST)
+- [Go引导过程](https://goquiz.github.io/#bootstrap)
+- [channel同步异步的区别](https://goquiz.github.io/#channel-sync-async)
+- [析构函数](https://goquiz.github.io/#finalizer)
+- [gc工作机制](https://goquiz.github.io/#gc)
+- [goroutine休眠](https://goquiz.github.io/#goroutine-sleep)
+- [内存分配过程](https://goquiz.github.io/#object-memory)
+- [stack和heap内存分配判定](https://goquiz.github.io/#stack-heap)
+- [goroutine暂停或者终止](https://goquiz.github.io/#stop-goroutine)
 
 
 <!--CATEGORY_END-->

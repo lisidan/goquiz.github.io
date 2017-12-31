@@ -1,0 +1,1 @@
+没有。但是runtime.SetFinalizer可以为一个对象指针指定一个回掉函数。

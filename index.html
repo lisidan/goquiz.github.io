@@ -2306,9 +2306,8 @@ func main() {
                     <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
                     <figure class="highlight gq-anwser">
                         <pre><code class=language-html data-lang=go>
-runtime.deferproc: 拷贝 context
-runtime.deferreturn: 取回 context
-合并 defer栈
+runtime.deferproc会导致栈上下文拷贝操作
+runtime.deferreturn会导致栈上下文取回操作
                             </code></pre>
                     </figure>
                     
@@ -2445,6 +2444,193 @@ func (v visitor) Visit(n ast.Node) ast.Visitor {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/bootstrap" target="_blank">报错</a>
+                    <h2 id=bootstrap>Go引导过程</h2>
+
+                    <div class="bs-example gq-question">
+                        简述一个go编译出的可执行文件启动的过程
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+执行src/runtime/目录下平台相关的汇编引导程序
+runtime·args():格式化CLI参数
+runtime·osinit():初始化CPU core
+runtime·schedinit(): 初始化goroutine上限,栈内存,malloc,CLI参数,环境变量,debug参数,gc,GOMAXPROCS
+runtime·mstart():启动gc monitor,enable gc,import所有依赖并执行相关init函数,执行main.main()
+
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/channel-sync-async" target="_blank">报错</a>
+                    <h2 id=channel-sync-async>channel同步异步的区别</h2>
+
+                    <div class="bs-example gq-question">
+                        同步channel和异步channel的区别是什么?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+同步channel和异步channel的区别，在于是否有缓冲槽。
+同步模式的关键是找到匹配的接收或发送方，找到则直接拷贝数据，找不到就将自身打包后放入等待队列，由另一方复制数据并唤醒。
+异步模式围绕缓冲槽进行。当有空位时，发送者向槽中复制数据;有数据后，接收者从槽中获取数据。双方都有唤醒排队另一方继续工作的责任。
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/finalizer" target="_blank">报错</a>
+                    <h2 id=finalizer>析构函数</h2>
+
+                    <div class="bs-example gq-question">
+                        go语言中间是否有析构函数?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+没有。但是runtime.SetFinalizer可以为一个对象指针指定一个回掉函数。
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/gc" target="_blank">报错</a>
+                    <h2 id=gc>gc工作机制</h2>
+
+                    <div class="bs-example gq-question">
+                        简述go gc工作机制
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+MarkWorker goroutine循环扫描所有对象并使用白灰黑三色分别标记不可达对象，待定对象，可达对象，直至确定所有的可达对象(即没有灰色对象)。
+编译器在写操作时特意插入的一段代码即write barrier，以实时监控所有用户goroutine对heap的修改
+执行Stop the world: scheduler休眠M(线程)并抢占所有G(goroutine)队列
+回收不可达对象以供heap或者central重用
+如果有整块的span内存被回收，在一定条件下可以release给操作系统
+执行Start the world，唤醒P(cpu core)和M(线程) 继续执行G(goroutine)队列
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/goroutine-sleep" target="_blank">报错</a>
+                    <h2 id=goroutine-sleep>goroutine休眠</h2>
+
+                    <div class="bs-example gq-question">
+                        解释C.sleep和time.Sleep的区别
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+C.sleep直接调用sleep syscall,会导致操作系统生成闲置线程
+time.Sleep对goroutine进行了优化,并未使用sleep syscall
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/object-memory" target="_blank">报错</a>
+                    <h2 id=object-memory>内存分配过程</h2>
+
+                    <div class="bs-example gq-question">
+                        简述go为object分配内存的过程
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+对于小对象(&lt;=32k),优先从goroutine的cache上分配，其次可以从central上申请，再其次可以从堆内存分配
+对于大对象(&gt;32k),直接从堆内存分配
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/stack-heap" target="_blank">报错</a>
+                    <h2 id=stack-heap>stack和heap内存分配判定</h2>
+
+                    <div class="bs-example gq-question">
+                        go什么情况下为对象分配栈内存，什么情况下分配堆内存
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+生命周期只存在在函数stack frame的变量，分配栈内存。跨栈传递对象的引用，对象则escape到堆内存。
+大对象(&gt;32k)直接在堆上分配内存。
+可以inline的函数里，原本escape到堆内存的对象也可能会被编译器优化成栈内存对象。
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/internals/stop-goroutine" target="_blank">报错</a>
+                    <h2 id=stop-goroutine>goroutine暂停或者终止</h2>
+
+                    <div class="bs-example gq-question">
+                        有哪些暂停或者终止当前goroutine的方法，它们之间有什么区别
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+runtime.Gosched: 让出CPU core并重新加入goroutine队列,并稍后会自动继续执行
+runtime.gopark: 使goroutine进入等待状态直至参数里的回调函数unlockf返回false才可继续执行
+runtime.notesleep: 直接休眠M(线程)
+runtime.Goexit:终止G(goroutine),并调用G.defer,并且并不会导致panic
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div>
 
                 <div class=bs-docs-section>
@@ -2567,6 +2753,22 @@ func (v visitor) Visit(n ast.Node) ast.Visitor {
                                     <a href=#SSA>SSA</a>
                                 </li><li>
                                     <a href=#AST>AST</a>
+                                </li><li>
+                                    <a href=#bootstrap>Go引导过程</a>
+                                </li><li>
+                                    <a href=#channel-sync-async>channel同步异步的区别</a>
+                                </li><li>
+                                    <a href=#finalizer>析构函数</a>
+                                </li><li>
+                                    <a href=#gc>gc工作机制</a>
+                                </li><li>
+                                    <a href=#goroutine-sleep>goroutine休眠</a>
+                                </li><li>
+                                    <a href=#object-memory>内存分配过程</a>
+                                </li><li>
+                                    <a href=#stack-heap>stack和heap内存分配判定</a>
+                                </li><li>
+                                    <a href=#stop-goroutine>goroutine暂停或者终止</a>
                                 </li>
                             </ul>
                         </li>
