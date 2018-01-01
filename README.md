@@ -55,6 +55,11 @@
 - [govendor路径覆盖](https://goquiz.github.io/#govendor-gopath)
 - [GOMAXPROCS](https://goquiz.github.io/#GOMAXPROCS)
 - [共享库](https://goquiz.github.io/#shared-object)
+- [GODEBUG参数](https://goquiz.github.io/#GODEBUG)
+- [$GOROOT和$GOPATH](https://goquiz.github.io/#GOROOT-GOPATH)
+- [go generate](https://goquiz.github.io/#go-generate)
+- [http server的pprof](https://goquiz.github.io/#http-pprof)
+- [./...路径通配符](https://goquiz.github.io/#path-wildcard)
 
 [内部原理](https://goquiz.github.io/#internals)
 - [string内部结构](https://goquiz.github.io/#unsafe-bytes-string)

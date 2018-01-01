@@ -2148,6 +2148,120 @@ func main() {
                     
 
                     
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/GODEBUG" target="_blank">报错</a>
+                    <h2 id=GODEBUG>GODEBUG参数</h2>
+
+                    <div class="bs-example gq-question">
+                        解释以下GODEBUG参数的意义
+GODEBUG=gctrace=1,schedtrace=1000
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+在stderr输出gc的debug信息以及每1000ms打印go scheduler的状态
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/GOROOT-GOPATH" target="_blank">报错</a>
+                    <h2 id=GOROOT-GOPATH>$GOROOT和$GOPATH</h2>
+
+                    <div class="bs-example gq-question">
+                        GOROOT和GOPATH的区别是什么?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+GOROOT是go标准库的根目录，包含标准库的CLI可执行文件，包，源代码，文档等等
+GOPATH是第三方库的可执行文件，包和源代码的根目录
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/go-generate" target="_blank">报错</a>
+                    <h2 id=go-generate>go generate</h2>
+
+                    <div class="bs-example gq-question">
+                        简述go generate的机制
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+在go generate命令行里指定的目录或者go文件里搜索//go:generate的注释，并以注释中指定的shell命令的stdout替代注释，并将结果输出至stdout
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/http-pprof" target="_blank">报错</a>
+                    <h2 id=http-pprof>http server的pprof</h2>
+
+                    <div class="bs-example gq-question">
+                        简述如何使用pprof来监控http server的性能数据
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+在http server的main.go里加入 import _ &#34;net/http/pprof&#34; 以启动pprof的http接口
+使用以下命令来获取相关信息
+N秒的 CPU profile:
+go tool pprof http://localhost:6060/debug/pprof/profile --second N
+heap profile:
+go tool pprof http://localhost:6060/debug/pprof/heap
+goroutine blocking profile:
+go tool pprof http://localhost:6060/debug/pprof/block
+                            </code></pre>
+                    </figure>
+                    
+
+                    
+                    <a class="pull-right gq-report-error" href="https://github.com/goquiz/goquiz.github.io/tree/master/_build/directory/toolchain/path-wildcard" target="_blank">报错</a>
+                    <h2 id=path-wildcard>./...路径通配符</h2>
+
+                    <div class="bs-example gq-question">
+                        命令行下./...是什么意思?
+                    </div>
+
+                    
+
+                    
+
+                    
+                    <button type="button" class="btn btn-info gq-anwser-btn">显示答案</button>
+                    <figure class="highlight gq-anwser">
+                        <pre><code class=language-html data-lang=go>
+当前目录下递归搜索所有路径的通配符
+                            </code></pre>
+                    </figure>
+                    
+
+                    
                 </div><div class=bs-docs-section>
                     <h1 class=page-header id=internals>内部原理</h1>
                     
@@ -2734,6 +2848,16 @@ runtime.Goexit:终止G(goroutine),并调用G.defer,并且并不会导致panic
                                     <a href=#GOMAXPROCS>GOMAXPROCS</a>
                                 </li><li>
                                     <a href=#shared-object>共享库</a>
+                                </li><li>
+                                    <a href=#GODEBUG>GODEBUG参数</a>
+                                </li><li>
+                                    <a href=#GOROOT-GOPATH>$GOROOT和$GOPATH</a>
+                                </li><li>
+                                    <a href=#go-generate>go generate</a>
+                                </li><li>
+                                    <a href=#http-pprof>http server的pprof</a>
+                                </li><li>
+                                    <a href=#path-wildcard>./...路径通配符</a>
                                 </li>
                             </ul>
                         </li><li>

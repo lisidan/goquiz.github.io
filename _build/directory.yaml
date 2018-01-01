@@ -85,6 +85,16 @@ sections:
         name: GOMAXPROCS
       - key: shared-object
         name: 共享库
+      - key: GODEBUG
+        name: GODEBUG参数
+      - key: GOROOT-GOPATH
+        name: $GOROOT和$GOPATH
+      - key: go-generate
+        name: go generate
+      - key: http-pprof
+        name: http server的pprof
+      - key: path-wildcard
+        name: ./...路径通配符
   - key: internals
     name: 内部原理
     quizzes:

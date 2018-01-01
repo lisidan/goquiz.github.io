@@ -1,0 +1,2 @@
+解释以下GODEBUG参数的意义
+GODEBUG=gctrace=1,schedtrace=1000

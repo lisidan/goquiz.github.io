@@ -1,0 +1,8 @@
+在http server的main.go里加入 import _ "net/http/pprof" 以启动pprof的http接口
+使用以下命令来获取相关信息
+N秒的 CPU profile:
+go tool pprof http://localhost:6060/debug/pprof/profile --second N
+heap profile:
+go tool pprof http://localhost:6060/debug/pprof/heap
+goroutine blocking profile:
+go tool pprof http://localhost:6060/debug/pprof/block

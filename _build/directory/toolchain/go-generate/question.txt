@@ -1,0 +1,1 @@
+简述go generate的机制

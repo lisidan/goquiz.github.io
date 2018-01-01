@@ -1,0 +1,1 @@
+GOROOT和GOPATH的区别是什么?

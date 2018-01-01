@@ -1,0 +1,1 @@
+在go generate命令行里指定的目录或者go文件里搜索//go:generate的注释，并以注释中指定的shell命令的stdout替代注释，并将结果输出至stdout
